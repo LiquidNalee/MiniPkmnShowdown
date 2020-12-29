@@ -3,15 +3,23 @@
 class StatsDict:
 
     def __init__(self, hp: int, atk: int, phys_def: int, spe_atk: int, spe_def: int, spd: int):
-        self.hp = hp
-        self.atk = atk
-        self.phys_def = phys_def
-        self.spe_atk = spe_atk
-        self.spe_def = spe_def
-        self.spd = spd
+        self.hp = int(hp)
+        self.atk = int(atk)
+        self.phys_def = int(phys_def)
+        self.spe_atk = int(spe_atk)
+        self.spe_def = int(spe_def)
+        self.spd = int(spd)
 
     def __eq__(self, other):
+        if self.__class__ != other.__class__:
+            return NotImplementedError
         return self.__dict__ == other.__dict__
+
+    def __getitem__(self, item: str):
+        return self.__dict__[item]
+
+    def __setitem__(self, key, value):
+        self.__dict__[key] = int(value)
 
     @classmethod
     def from_json(cls, json: {}):
