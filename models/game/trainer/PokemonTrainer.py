@@ -8,5 +8,6 @@ class PokemonTrainer:
 
     def __init__(self, name: str, team: List[PokemonModel], badges: List[ArenaBadge]):
         self.name = name
-        self.team = team
+        self.team = [team[i] if i < len(team) else None for i in range(6)]
         self.badges = badges
+        self.badges.sort()

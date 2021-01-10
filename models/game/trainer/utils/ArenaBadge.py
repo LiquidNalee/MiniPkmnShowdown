@@ -2,11 +2,17 @@ from enum import Enum
 
 
 class ArenaBadge(Enum):
-    BadgeRoche = 1
-    BadgeCascade = 2
-    BadgeFoudre = 3
-    BadgePrisme = 4
-    BadgeAme = 5
-    BadgeMarais = 6
-    BadgeVolcan = 7
-    BadgeTerre = 8
+    Boulder = 1
+    Cascade = 2
+    Thunder = 3
+    Rainbow = 4
+    Soul = 5
+    Marsh = 6
+    Volcano = 7
+    Earth = 8
+
+    def __lt__(self, other):
+        if self.__class__ != other.__class__:
+            return NotImplementedError
+        return self.value < other.value
+
