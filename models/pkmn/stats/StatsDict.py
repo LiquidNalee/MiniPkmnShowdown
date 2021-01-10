@@ -2,7 +2,7 @@
 
 class StatsDict:
 
-    def __init__(self, hp: int, atk: int, phys_def: int, spe_atk: int, spe_def: int, spd: int):
+    def __init__(self, hp: int = 0, atk: int = 0, phys_def: int = 0, spe_atk: int = 0, spe_def: int = 0, spd: int = 0):
         self.hp = int(hp)
         self.atk = int(atk)
         self.phys_def = int(phys_def)

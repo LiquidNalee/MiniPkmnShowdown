@@ -4,13 +4,13 @@ from models.pkmn.PokemonBaseModel import PokemonBaseModel
 from models.pkmn.stats.StatsDict import StatsDict
 from models.pkmn.types.PokemonType import PokemonType
 from models.pkmn.natures.PokemonNature import PokemonNature
-from models.pkmn.moves.PokemonBaseMove import PokemonBaseMove
+from models.pkmn.moves.PokemonMove import PokemonMove
 
 
 class PokemonModel(PokemonBaseModel):
 
     def __init__(self, name: str, types: (PokemonType, PokemonType), level: int, nature: PokemonNature,
-                 moves: List[PokemonBaseMove], base_stats: StatsDict, evs: StatsDict, ivs: StatsDict):
+                 moves: List[PokemonMove], base_stats: StatsDict, evs: StatsDict, ivs: StatsDict):
         super().__init__(name=name, types=types, base_stats=base_stats)
         self.level = level
         self._nature = nature
