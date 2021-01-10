@@ -11,8 +11,8 @@ from models.game.trainer.utils.ArenaBadge import ArenaBadge
 
 class TestPokemonTrainer(TestCase):
 
-    def testPokemonTrainer(self):
-        Pikachu = PokemonModel(
+    def setUp(self) -> None:
+        self.Pikachu = PokemonModel(
             name="Pikachu",
             types=(PokemonType.Electric, None),
             level=100,
@@ -45,7 +45,7 @@ class TestPokemonTrainer(TestCase):
             evs=StatsDict(hp=0, atk=252, phys_def=0, spe_atk=4, spe_def=0, spd=252),
             ivs=StatsDict(hp=31, atk=31, phys_def=31, spe_atk=31, spe_def=31, spd=31)
         )
-        Charizard = PokemonModel(
+        self.Charizard = PokemonModel(
             name="Charizard",
             types=(PokemonType.Fire, PokemonType.Flying),
             level=100,
@@ -72,15 +72,16 @@ class TestPokemonTrainer(TestCase):
             evs=StatsDict(hp=0, atk=0, phys_def=0, spe_atk=252, spe_def=4, spd=252),
             ivs=StatsDict(hp=31, atk=31, phys_def=31, spe_atk=31, spe_def=31, spd=31)
         )
-        Red = PokemonTrainer(
+        self.Red = PokemonTrainer(
             name="Red",
-            team=[Pikachu, Charizard],
+            team=[self.Pikachu, self.Charizard],
             badges=[ArenaBadge.Boulder, ArenaBadge.Cascade, ArenaBadge.Thunder, ArenaBadge.Rainbow,
                     ArenaBadge.Soul, ArenaBadge.Marsh, ArenaBadge.Marsh, ArenaBadge.Earth]
         )
 
-        assert Red.team[0] == Pikachu
-        assert Red.team[1] == Charizard
-        assert Red.team[2] is None and Red.team[5] is None
-        assert Red.badges == [ArenaBadge.Boulder, ArenaBadge.Cascade, ArenaBadge.Thunder, ArenaBadge.Rainbow,
-                              ArenaBadge.Soul, ArenaBadge.Marsh, ArenaBadge.Marsh, ArenaBadge.Earth]
+    def testPokemonTrainer(self):
+        assert self.Red.team[0] == self.Pikachu
+        assert self.Red.team[1] == self.Charizard
+        assert self.Red.team[2] is None and self.Red.team[5] is None
+        assert self.Red.badges == [ArenaBadge.Boulder, ArenaBadge.Cascade, ArenaBadge.Thunder, ArenaBadge.Rainbow,
+                                   ArenaBadge.Soul, ArenaBadge.Marsh, ArenaBadge.Marsh, ArenaBadge.Earth]
