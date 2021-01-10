@@ -1,4 +1,5 @@
 from enum import Enum
+from re import sub
 
 
 class PokemonType(Enum):
@@ -25,6 +26,9 @@ class PokemonType(Enum):
         if self.__class__ != other.__class__:
             return NotImplementedError
         return self.value < other.value
+
+    def __str__(self):
+        return sub("PokemonType\\.", "", super().__str__())
 
 
 def format_types_tuple(types: (PokemonType, PokemonType)):
