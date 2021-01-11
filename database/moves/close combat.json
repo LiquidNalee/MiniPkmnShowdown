@@ -1,0 +1,1 @@
+{"type": "Fighting", "category": "Physical", "pp": 5, "power": 120, "accuracy": 100, "priority": 0, "effect_rate": 100, "self_stat_mod": {}, "trgt_stat_mod": {"phys_def": -1, "spe_def": -1}}

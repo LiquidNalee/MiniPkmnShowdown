@@ -1,0 +1,1 @@
+{"type": "Dragon", "category": "Special", "pp": 5, "power": 130, "accuracy": 90, "priority": 0, "effect_rate": 100, "self_stat_mod": {}, "trgt_stat_mod": {"spe_atk": -2}}

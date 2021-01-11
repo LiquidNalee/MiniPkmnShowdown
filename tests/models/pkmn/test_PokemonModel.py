@@ -41,9 +41,9 @@ class TestPokemonModel(TestCase):
                 PokemonMove(
                     name="Swords Dance",
                     move_type=PokemonType.Normal,
-                    category=MoveCategory.Support,
+                    category=MoveCategory.Status,
                     pp=32,
-                    stat_mod_rate=100,
+                    effect_rate=100,
                     self_stat_mod=StatsDict(atk=2)
                 )
             ],

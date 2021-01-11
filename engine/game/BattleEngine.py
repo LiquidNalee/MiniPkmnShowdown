@@ -57,7 +57,7 @@ class BattleEngine:
             -> bool:
         damage = 0
         type_effectiveness = 1
-        if caster_move.category != MoveCategory.Support:
+        if caster_move.category != MoveCategory.Status:
             offensive_stat = caster.stats.atk if caster_move.category == MoveCategory.Physical \
                 else caster.stats.spe_atk
             defensive_stat = trgt.stats.phys_def if caster_move.category == MoveCategory.Physical \
@@ -74,7 +74,7 @@ class BattleEngine:
             trgt.takeDamage(damage)
         displayUsedMove(caster, caster_move, trgt, type_effectiveness, damage)
 
-        if randint(0, 100) <= caster_move.stat_mod_rate:
+        if randint(0, 100) <= caster_move.effect_rate:
             for stat_key in StatsDict.__dict__.keys():
                 caster.stats[stat_key] *= caster_move.self_stat_mod[stat_key]
                 trgt.stats[stat_key] *= caster_move.trgt_stat_mod[stat_key]

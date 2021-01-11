@@ -5,48 +5,40 @@
       "name": "Scizor",
       "level": 100,
       "nature": "Adamant",
-      "moves": ["Bullet Punch"],
+      "moves": ["Swords Dance", "Bullet Punch", "Bug Bite", "Close Combat"],
       "evs": {"hp": 120, "atk": 252, "phys_def": 0, "spe_atk": 0, "spe_def": 0, "spd": 136},
       "ivs": {"hp": 31, "atk": 31, "phys_def": 31, "spe_atk": 31, "spe_def": 31, "spd": 31}
     },
     "1": {
-      "name": "Scizor",
+      "name": "Tyranitar",
       "level": 100,
       "nature": "Adamant",
-      "moves": ["Bullet Punch"],
-      "evs": {"hp": 120, "atk": 252, "phys_def": 0, "spe_atk": 0, "spe_def": 0, "spd": 136},
+      "moves": ["Dragon Dance", "Stone Edge", "Crunch", "Earthquake"],
+      "evs": {"hp": 168, "atk": 252, "phys_def": 0, "spe_atk": 0, "spe_def": 0, "spd": 88},
       "ivs": {"hp": 31, "atk": 31, "phys_def": 31, "spe_atk": 31, "spe_def": 31, "spd": 31}
     },
     "2": {
-      "name": "Scizor",
+      "name": "Venusaur",
       "level": 100,
-      "nature": "Adamant",
-      "moves": ["Bullet Punch"],
-      "evs": {"hp": 120, "atk": 252, "phys_def": 0, "spe_atk": 0, "spe_def": 0, "spd": 136},
+      "nature": "Bold",
+      "moves": ["Wood Hammer", "Sludge Bomb", "Earthquake", "Solar Beam"],
+      "evs": {"hp": 252, "atk": 0, "phys_def": 252, "spe_atk": 0, "spe_def": 4, "spd": 0},
       "ivs": {"hp": 31, "atk": 31, "phys_def": 31, "spe_atk": 31, "spe_def": 31, "spd": 31}
     },
     "3": {
-      "name": "Scizor",
+      "name": "Charizard",
       "level": 100,
-      "nature": "Adamant",
-      "moves": ["Bullet Punch"],
-      "evs": {"hp": 120, "atk": 252, "phys_def": 0, "spe_atk": 0, "spe_def": 0, "spd": 136},
+      "nature": "Jolly",
+      "moves": ["Fire Blast", "Hurricane", "Draco Meteor", "Mystical Fire"],
+      "evs": {"hp": 0, "atk": 0, "phys_def": 0, "spe_atk": 252, "spe_def": 4, "spd": 252},
       "ivs": {"hp": 31, "atk": 31, "phys_def": 31, "spe_atk": 31, "spe_def": 31, "spd": 31}
     },
     "4": {
-      "name": "Scizor",
+      "name": "Blastoise",
       "level": 100,
-      "nature": "Adamant",
-      "moves": ["Bullet Punch"],
-      "evs": {"hp": 120, "atk": 252, "phys_def": 0, "spe_atk": 0, "spe_def": 0, "spd": 136},
-      "ivs": {"hp": 31, "atk": 31, "phys_def": 31, "spe_atk": 31, "spe_def": 31, "spd": 31}
-    },
-    "5": {
-      "name": "Scizor",
-      "level": 100,
-      "nature": "Adamant",
-      "moves": ["Bullet Punch"],
-      "evs": {"hp": 120, "atk": 252, "phys_def": 0, "spe_atk": 0, "spe_def": 0, "spd": 136},
+      "nature": "Modest",
+      "moves": ["Hydro Pump", "Ice Beam", "Aura Sphere", "Moonblast"],
+      "evs": {"hp": 120, "atk": 0, "phys_def": 0, "spe_atk": 252, "spe_def": 0, "spd": 136},
       "ivs": {"hp": 31, "atk": 31, "phys_def": 31, "spe_atk": 31, "spe_def": 31, "spd": 31}
     }
   }

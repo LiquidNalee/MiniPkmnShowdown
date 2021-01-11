@@ -1,0 +1,1 @@
+{"type": "Fire", "category": "Special", "pp": 10, "power": 75, "accuracy": 100, "priority": 0, "effect_rate": 100, "self_stat_mod": {}, "trgt_stat_mod": {"spe_atk": -1}}

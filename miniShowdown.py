@@ -1,7 +1,7 @@
 from argparse import ArgumentParser
 from json import load
 
-from database.DatabaseConfig import updatePkmnDatabase
+from database.DatabaseConfig import updatePkmnDatabase, updateMoveDatabase
 
 from engine.game.BattleEngine import BattleEngine
 from engine.pkmn.types.ClassicTypesRuleSet import ClassicTypesRuleSet
@@ -15,7 +15,7 @@ from models.pkmn.stats.StatsDict import StatsDict
 from models.pkmn.types.PokemonType import PokemonType
 
 parser = ArgumentParser()
-parser.add_argument("--update_db", help="Fill out Pkmn info as json in database folder for future use",
+parser.add_argument("--update_db", "-u", help="Fill out Pkmn info as json in database folder for future use",
                     type=bool, required=False)
 parser.add_argument("--player_trainer_json", "-p", help="Path to player's pokemon trainer json",
                     type=str, required=False)
@@ -153,7 +153,12 @@ def setUpDefaultTeams():
 
 def main():
     if args.update_db:
-        updatePkmnDatabase([str(_) for _ in range(151)])
+        updatePkmnDatabase([str(_) for _ in range(10)])
+        updateMoveDatabase(["Swords Dance", "Meteor Mash", "Close Combat", "Mach Punch", "Aura Sphere", "Bug Bite",
+                            "Hydro Pump", "Surf", "Waterfall", "Moonblast", "Play Rough", "Solar Beam", "Wood Hammer",
+                            "Stone Edge", "Meteor Gem", "Sludge Bomb", "Poison Jab", "Draco Meteor", "Outrage",
+                            "Dragon Dance", "Psychic", "Zen Headbutt", "Mystical Fire", "Fire Blast", "Flare Blitz",
+                            "Hurricane", "Brave Bird", "Earthquake", "Earth Power"])
 
     player, opponent = setUpDefaultTeams()
 
