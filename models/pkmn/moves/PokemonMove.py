@@ -1,7 +1,11 @@
 from enum import Enum
+from os.path import join
+from json import load
 
 from models.pkmn.types.PokemonType import PokemonType
 from models.pkmn.stats.StatsDict import StatsDict
+
+from database.DatabaseConfig import database_dir
 
 
 class MoveCategory(Enum):
@@ -40,21 +44,19 @@ class PokemonMove:
                if self.trgt_stat_mod != StatsDict() else \
                ""
 
-    def asJson(self):
-        return {
-            "name": self.name,
-            "type": str(self.type),
-            "category": self.category.value,
-            "pp": self.pp,
-            "max_pp": self.max_pp,
-            "power": self.power,
-            "accuracy": self.accuracy,
-            "priority": f"{'+' if self.priority > 0 else ''}{self.priority}",
-            "stat_mod": "" if self.stat_mod_rate == 0 else
-                        f"{self.stat_mod_rate}%: " if self.stat_mod_rate != 100 else ""
-                        + f"{', '.join([key + ' x' + val for key, val in self.self_stat_mod if val != 0])} [Self]"
-                        if self.self_stat_mod != StatsDict() else
-                        f"{', '.join([key + ' x' + val for key, val in self.trgt_stat_mod if val != 0])} [Target]"
-                        if self.trgt_stat_mod != StatsDict() else
-                        ""
-        }
+    @staticmethod
+    def fromDb(name: str):
+        with open(join(str(database_dir), "moves", f"{name}.json")) as move_data_file:
+            move_data = load(move_data_file)
+            return PokemonMove(
+                name=name,
+                move_type=PokemonType[move_data["type"]],
+                category=MoveCategory[move_data["category"]],
+                pp=int(move_data["pp"]),
+                power=int(move_data["power"]) if "power" in move_data else 0,
+                accuracy=int(move_data["accuracy"]) if "accuracy" in move_data else 100,
+                priority=int(move_data["priority"]) if "priority" in move_data else 0,
+                stat_mod_rate=int(move_data["stat_mod_rate"]) if "stat_mod_rate" in move_data else 0,
+                self_stat_mod=StatsDict(move_data["self_stat_mod"]) if "self_stat_mod" in move_data else StatsDict(),
+                trgt_stat_mod=StatsDict(move_data["trgt_stat_mod"]) if "trgt_stat_mod" in move_data else StatsDict()
+            )

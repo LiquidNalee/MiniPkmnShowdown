@@ -1,10 +1,14 @@
 from typing import List
+from os.path import join
+from json import load
 
 from models.pkmn.PokemonBaseModel import PokemonBaseModel
 from models.pkmn.stats.StatsDict import StatsDict
 from models.pkmn.types.PokemonType import PokemonType
 from models.pkmn.natures.PokemonNature import PokemonNature
 from models.pkmn.moves.PokemonMove import PokemonMove
+
+from database.DatabaseConfig import database_dir
 
 
 class PokemonModel(PokemonBaseModel):
@@ -56,3 +60,21 @@ class PokemonModel(PokemonBaseModel):
         })
         self._nature.apply_modifier(stat_values)
         return stat_values
+
+    @staticmethod
+    def fromJson(json: {}):
+        keys = ["name", "level", "nature", "moves", "evs", "ivs"]
+        if all(key in json for key in keys):
+            with open(join(str(database_dir), "pkmn", f"{json['name']}.json")) as pkmn_data_file:
+                pkmn_data = load(pkmn_data_file)
+                return PokemonModel(
+                    name=json["name"],
+                    types=(PokemonType[pkmn_data["type"]['0']],
+                           PokemonType[pkmn_data["type"]['1']] if 1 in pkmn_data["type"] else None),
+                    level=int(json["level"]),
+                    nature=PokemonNature[json["nature"]],
+                    moves=[PokemonMove.fromDb(move) for move in json["moves"]],
+                    base_stats=StatsDict(**pkmn_data["base_stats"]),
+                    evs=StatsDict(**json["evs"]),
+                    ivs=StatsDict(**json["ivs"])
+                )

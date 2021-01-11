@@ -1,0 +1,11 @@
+{
+  "type": {"0": "Steel", "1": "Bug"},
+  "base_stats": {
+    "hp": 70,
+    "atk": 130,
+    "phys_def": 100,
+    "spe_atk": 55,
+    "spe_def": 80,
+    "spd": 65
+  }
+}

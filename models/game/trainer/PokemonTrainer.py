@@ -23,3 +23,13 @@ class PokemonTrainer:
 
     def makeCopy(self):
         return PokemonTrainer(name=self.name, team=list(self.team), badges=list(self.badges))
+
+    @staticmethod
+    def fromJson(json: {}):
+        if "name" in json and "team" in json:
+            return PokemonTrainer(
+                name=json["name"],
+                team=[PokemonModel.fromJson(json["team"][_]) for _ in json["team"]],
+                badges=[]
+            )
+        raise AttributeError("PokemonTrainer - fromJson: Invalid JSON Input")
