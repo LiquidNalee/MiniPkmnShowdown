@@ -10,16 +10,19 @@ def __shiftDisplayBox(box: str, shift: int):
     return sub("^", "\t".join("" for _ in range(shift)), box, flags=M)
 
 
+def __displaySideBySide(box_1: str, box_2: str):
+    split_lines = (box_1.splitlines(), box_2.splitlines())
+    print("\n".join([f"{split_lines[0][_]:<50}{split_lines[1][_]:>50}" for _ in range(len(split_lines[0]))]))
+
+
 def displayPlayers(battleGameState: BattleGameState):
-    print(__shiftDisplayBox(str(battleGameState.opponent), 20))
-    print(str(battleGameState.player))
+    __displaySideBySide(str(battleGameState.player), str(battleGameState.opponent))
 
 
 def displayBattleGameState(battleGameState: BattleGameState):
     displayPlayers(battleGameState)
     print(f"Turn: {battleGameState.turn}\n")
-    print(__shiftDisplayBox(str(battleGameState.getOpponentActivePkmn()), 20))
-    print(str(battleGameState.getPlayerActivePkmn()))
+    __displaySideBySide(str(battleGameState.getPlayerActivePkmn()), str(battleGameState.getOpponentActivePkmn()))
     print(f"{__separation_line}")
     print(battleGameState.getPlayerActivePkmn().moveListAsStr())
     print(f"{__separation_line}")

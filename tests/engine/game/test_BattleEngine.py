@@ -1,5 +1,8 @@
+import builtins
 from unittest import TestCase
+import mock
 
+from engine.game import InputHandler
 from engine.game.BattleEngine import BattleEngine
 from engine.pkmn.types.ClassicTypesRuleSet import ClassicTypesRuleSet
 from models.game.battle.BattleGameState import BattleGameState
@@ -46,33 +49,6 @@ class TestBattleEngine(TestCase):
             ],
             base_stats=StatsDict(hp=35, atk=55, phys_def=40, spe_atk=50, spe_def=50, spd=90),
             evs=StatsDict(hp=0, atk=252, phys_def=0, spe_atk=4, spe_def=0, spd=252),
-            ivs=StatsDict(hp=31, atk=31, phys_def=31, spe_atk=31, spe_def=31, spd=31)
-        )
-        self.Charizard = PokemonModel(
-            name="Charizard",
-            types=(PokemonType.Fire, PokemonType.Flying),
-            level=100,
-            nature=PokemonNature.Jolly,
-            moves=[
-                PokemonMove(
-                    name="Fire Blast",
-                    move_type=PokemonType.Fire,
-                    category=MoveCategory.Special,
-                    pp=8,
-                    power=110,
-                    accuracy=85
-                ),
-                PokemonMove(
-                    name="Hurricane",
-                    move_type=PokemonType.Flying,
-                    category=MoveCategory.Special,
-                    pp=16,
-                    power=110,
-                    accuracy=70
-                )
-            ],
-            base_stats=StatsDict(hp=78, atk=84, phys_def=78, spe_atk=109, spe_def=85, spd=100),
-            evs=StatsDict(hp=0, atk=0, phys_def=0, spe_atk=252, spe_def=4, spd=252),
             ivs=StatsDict(hp=31, atk=31, phys_def=31, spe_atk=31, spe_def=31, spd=31)
         )
         self.Pidgeot = PokemonModel(
@@ -128,7 +104,7 @@ class TestBattleEngine(TestCase):
         )
         self.Red = PokemonTrainer(
             name="Red",
-            team=[self.Pikachu, self.Charizard],
+            team=[self.Pikachu],
             badges=[ArenaBadge.Boulder, ArenaBadge.Cascade, ArenaBadge.Thunder, ArenaBadge.Rainbow,
                     ArenaBadge.Soul, ArenaBadge.Marsh, ArenaBadge.Marsh, ArenaBadge.Earth]
         )
@@ -141,5 +117,9 @@ class TestBattleEngine(TestCase):
         self.BattleGameState = BattleGameState(player=self.Red, opponent=self.Blue)
 
     def test_red_blue_battle(self):
-        engine = BattleEngine(battleGameState=self.BattleGameState, typesRuleSet=ClassicTypesRuleSet())
-        engine.startGame()
+        with mock.patch.object(InputHandler, 'getCancelableNumberInput', return_value=0):
+            with mock.patch.object(InputHandler, 'getNumberInput', return_value=0):
+                with mock.patch.object(InputHandler, 'getDecisionType', return_value='m'):
+                    with mock.patch.object(builtins, 'input', return_value=''):
+                        engine = BattleEngine(battleGameState=self.BattleGameState, typesRuleSet=ClassicTypesRuleSet())
+                        assert not engine.startGame()

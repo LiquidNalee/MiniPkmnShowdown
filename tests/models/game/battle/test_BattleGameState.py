@@ -140,7 +140,7 @@ class TestBattleGameState(TestCase):
 
     def test_battle_game_state(self):
 
-        assert self.BattleGameState.player == self.Red and self.BattleGameState.opponent == self.Blue
+        assert self.BattleGameState.player.name == "Red" and self.BattleGameState.opponent.name == "Blue"
         assert self.BattleGameState.turn == 1
         assert self.BattleGameState.getPlayerActivePkmn() == self.Pikachu
         assert self.BattleGameState.getOpponentActivePkmn() == self.Pidgeot
