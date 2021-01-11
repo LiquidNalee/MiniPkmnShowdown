@@ -51,6 +51,7 @@ class BattleEngine:
             self.__useMove(first[0], first[1], second[0])
             if not second[0].isKO() and second[1] is not None:
                 self.__useMove(second[0], second[1], first[0])
+            self.gameState.turn += 1
 
     def __useMove(self, caster: PokemonModel, caster_move: PokemonMove, trgt: PokemonModel) \
             -> bool:
@@ -88,8 +89,7 @@ class BattleEngine:
 
     def __switchOpponentPokemon(self):
         out = self.gameState.getOpponentActivePkmn()
-        opponent_pkmn_selection = randint(0, len([_ for _ in self.gameState.opponent.team if _ is not None]))
-        coming_in = self.gameState.setOpponentActivePkmn(opponent_pkmn_selection)
+        coming_in = self.gameState.sendNextOpponentActivePkmn()
         displaySwitch(player_name=self.gameState.opponent.name, out=out, coming_in=coming_in)
 
     def __getMoveOrder(self) -> ((PokemonModel, PokemonMove), (PokemonModel, PokemonMove)):

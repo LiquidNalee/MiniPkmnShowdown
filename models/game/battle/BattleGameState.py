@@ -28,6 +28,10 @@ class BattleGameState:
         self.__opponent_active_pkmn_slot = index
         return self.opponent.team[self.__opponent_active_pkmn_slot]
 
+    def sendNextOpponentActivePkmn(self) -> PokemonModel:
+        self.__opponent_active_pkmn_slot += 1
+        return self.opponent.team[self.__opponent_active_pkmn_slot]
+
     def getTurnState(self):
         return (self.getPlayerActivePkmn(), self.player_move_selection),\
                (self.getOpponentActivePkmn(), self.opponent_move_selection)

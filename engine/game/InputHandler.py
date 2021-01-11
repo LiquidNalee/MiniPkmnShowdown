@@ -31,7 +31,10 @@ def getDecisionType():
 @repeatOnError(ValueError)
 def getNumberInput(max_range: int):
     i = input(f'Enter your selection (0 - {max_range - 1}): ')
-    return int(i)
+    val = int(i)
+    if val < 0 or val >= max_range:
+        raise ValueError
+    return val
 
 
 @repeatOnError(ValueError)
@@ -39,12 +42,21 @@ def getCancelableNumberInput(max_range: int):
     i = input(f'Enter your selection (0 - {max_range - 1}) or Cancel (C): ')
     if i == "C":
         return -1
-    return int(i)
+    val = int(i)
+    if val < 0 or val >= max_range:
+        raise ValueError
+    return val
 
 
 def pkmnSelection(team: List[PokemonModel]) -> int:
     print("\nChoose a Pkmn.")
-    return getNumberInput(len([_ for _ in team if _ is not None]))
+    while True:
+        i = getNumberInput(len([_ for _ in team if _ is not None]))
+        if team[i].isKO():
+            print(f"{team[i].name} is K.O ! It cannot fight anymore...")
+        else:
+            break
+    return i
 
 
 def turnDecision(active_pkmn: PokemonModel, team: List[PokemonModel]) -> (PokemonMove, int):

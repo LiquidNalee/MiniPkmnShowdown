@@ -16,7 +16,9 @@ class PokemonTrainer:
         team_str_list = [f"{x}. {self.team[x].name} ({self.team[x].stats.hp}/{self.team[x].max_hp})"
                          for x in range(len(self.team)) if self.team[x] is not None]
         return f"Trainer: {self.name}\n" \
-               f"{'  -  '.join(team_str_list)}"
+               f"{'  -  '.join(team_str_list[0:2])}\n" \
+               f"{'  -  '.join(team_str_list[2:4])}\n" \
+               f"{'  -  '.join(team_str_list[4:6])}\n"
 
     def hasLost(self):
         return all(pkmn.isKO() if pkmn is not None else True for pkmn in self.team)

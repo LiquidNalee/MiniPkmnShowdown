@@ -46,7 +46,7 @@ class PokemonMove:
 
     @staticmethod
     def fromDb(name: str):
-        with open(join(str(database_dir), "moves", f"{name}.json")) as move_data_file:
+        with open(join(str(database_dir), "moves", f"{name.lower()}.json")) as move_data_file:
             move_data = load(move_data_file)
             return PokemonMove(
                 name=name,

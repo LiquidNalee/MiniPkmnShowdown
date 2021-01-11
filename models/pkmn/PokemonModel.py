@@ -13,7 +13,7 @@ from database.DatabaseConfig import database_dir
 
 class PokemonModel(PokemonBaseModel):
 
-    __bar_len = 25
+    __bar_len = 50
 
     def __init__(self, name: str, types: (PokemonType, PokemonType), level: int, nature: PokemonNature,
                  moves: List[PokemonMove], base_stats: StatsDict, evs: StatsDict, ivs: StatsDict):
@@ -29,9 +29,9 @@ class PokemonModel(PokemonBaseModel):
     def __str__(self):
         hp_percentage = self.stats.hp / self.max_hp
         ticks = int(hp_percentage * self.__bar_len + .5)
-        return f"{self.name} (lvl.{self.level}):" \
-               f"{'█'.join('' for _ in range(ticks))}{'▁'.join('' for _ in range(self.__bar_len - ticks))}" \
-               f" {self.stats.hp}/{self.max_hp} ({int(hp_percentage * 100)}%)"
+        return f"{self.name} (lvl.{self.level}):\n" \
+               f"{'█'.join('' for _ in range(ticks))}{'▁'.join('' for _ in range(self.__bar_len - ticks))}\n" \
+               f"{self.stats.hp}/{self.max_hp} ({int(hp_percentage * 100)}%)"
 
     def moveListAsStr(self) -> str:
         split_lines = [str(move).splitlines() for move in self.moves]
@@ -65,7 +65,7 @@ class PokemonModel(PokemonBaseModel):
     def fromJson(json: {}):
         keys = ["name", "level", "nature", "moves", "evs", "ivs"]
         if all(key in json for key in keys):
-            with open(join(str(database_dir), "pkmn", f"{json['name']}.json")) as pkmn_data_file:
+            with open(join(str(database_dir), "pkmn", f"{json['name'].lower()}.json")) as pkmn_data_file:
                 pkmn_data = load(pkmn_data_file)
                 return PokemonModel(
                     name=json["name"],

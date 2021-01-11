@@ -1,5 +1,7 @@
 from unittest import TestCase
 
+from database.DatabaseConfig import getPkmnDatabase
+
 from models.game.trainer.PokemonTrainer import PokemonTrainer
 from models.pkmn.natures.PokemonNature import PokemonNature
 from models.pkmn.stats.StatsDict import StatsDict
@@ -34,3 +36,20 @@ class TestDatabaseInit(TestCase):
         assert trainer.team[0].moves[0].accuracy == 100
         assert trainer.team[0].base_stats == StatsDict(hp=70, atk=130, phys_def=100, spe_atk=55, spe_def=80, spd=65)
         assert trainer.team[0].stats == StatsDict(hp=311, atk=394, phys_def=236, spe_atk=131, spe_def=196, spd=200)
+
+    def test_database_update(self):
+        db = getPkmnDatabase(["tyranitar"])
+
+        assert "tyranitar" in db
+        expected_json = {
+            "type": {"0": "rock", "1": "dark"},
+            "base_stats": {
+                "hp": 100,
+                "atk": 134,
+                "phys_def": 110,
+                "spe_atk": 95,
+                "spe_def": 100,
+                "spd": 61
+            }
+        }
+        assert db["tyranitar"] == expected_json
